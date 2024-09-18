@@ -4,8 +4,8 @@ import { HomeComponent } from './home/home.component';
 import { SmartQueryComponent } from './smart-query/smart-query.component';
 
 const routes: Routes = [
-  {path:"home",component:HomeComponent},
-  {path:"",component:SmartQueryComponent}
+  {path:"",component:HomeComponent},
+  {path:"SmartQuery",component:SmartQueryComponent}
 ];
 
 @NgModule({

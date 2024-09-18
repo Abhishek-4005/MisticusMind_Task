@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { ChatRoutingModule } from './chat-routing.module';
 import { HomeComponent } from './home/home.component';
 import { SmartQueryComponent } from './smart-query/smart-query.component';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import { SmartQueryComponent } from './smart-query/smart-query.component';
   ],
   imports: [
     CommonModule,
-    ChatRoutingModule
+    ChatRoutingModule,
+    FormsModule
   ]
 })
 export class ChatModule { }
