@@ -19,4 +19,11 @@ export class ChatService {
     return this.http.get(`${this.apiUrl}user_history/${userId}`)
   }
 
+  thumbsDown(data:any){
+    return this.http.post(`${this.apiUrl}validator/`,data)
+  }
+  getthumbsDownHistory(){
+    return this.http.get(`${this.apiUrl}dislikes/`)
+  }
+
 }

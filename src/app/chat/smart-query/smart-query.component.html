@@ -1,58 +1,114 @@
 <div class="container">
-    <div class="chat-list">
-        <button>+ New Chat</button>
-        <ul *ngFor="let history of userHistory ">
-            <button type="button" data-toggle="modal" data-target="#exampleModalCenter">{{history.question}}</button>
-            
-        </ul>
-    </div>
-    <!-- <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              ...
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
+   <!-- suggestion mOdal  -->
+   <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+   aria-hidden="true">
+   <div class="modal-dialog modal-dialog-centered" role="document">
+     <div class="modal-content">
+       <form [formGroup]="suggestionForm" (ngSubmit)="sendSuggestion()">
+         <div class="modal-header">
+           <h5 class="modal-title" id="exampleModalLongTitle"></h5>
+           <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+             <span aria-hidden="true">&times;</span>
+           </button>
+
+
+         </div>
+         <div class="modal-body">
+
+           <div class="form-group">
+             <input type="text" class="form-control mb-4 queInput" formControlName="Question" id=""
+               placeholder="Question">
+
+           </div>
+           <div class="mb-3">
+
+             <textarea class="form-control" formControlName="Suggested_ans" rows="10"></textarea>
+           </div>
+
+         </div>
+         <div class="modal-footer">
+         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+         <button type="submit" class="btn btn-primary">Submit</button>
+         </div>
+       </form>
+     </div>
+
+   </div>
+ </div>
+
+ <!-- history modal  -->
+ <div class="modal fade" id="HistoryModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header p-0 ps-2">
+        <!-- <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5> -->
+        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" *ngFor="let x of chatHistory" >
+        <div class="q_section mb-2">
+          <h3>Question:</h3>
+          <p class="queInput">{{x.question}}</p>
+        </div>
+        <div class="main d-flex">
+          <div class="res me-2 ">
+            <h3>Response:</h3>
+            <p>{{x.response}}</p>
+          </div>
+          <div class="source ms-2">
+            <h3>Source_Document:</h3>
+            <p class="page_content">{{x.source_document.page_content}}
+              {{x.source_document.metadata.source}}
+            </p>
           </div>
         </div>
-      </div> -->
-
-    <div class="chat-window">
-        <div class="chat-header">Query</div>
-        <div class="message-container" *ngFor="let item of Answer">
-            <div class="Questions">
-                <img src="../assets/user.png" alt="User">
-                <div class="message">{{item.question}}</div>
-            </div>
-            <div class="bot-message">
-                <img src="../assets/chatbot.png">
-                <div class="Answer">
-                    {{item.response}}
-                </div>
-            </div>
-
-            <div class="actions ">
-    
-                <i class="fa-solid fa-thumbs-down text-success"></i>
-                <i class="fa-solid fa-thumbs-up text-danger"></i>
-            </div>
-
-           
-        </div>
-
-        <div class="message-input">
-            <i class="fa fa-user fa-2x me-3" aria-hidden="true"></i>
-            <input type="text" placeholder="Type your message..." [(ngModel)]="query" (keydown.enter)="onSend()" >
-            <i class="fa fa-paper-plane fa-2x " aria-hidden="true" (click)="onSend()"></i>
-        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
     </div>
+  </div>
+</div>
+  <div class="chat-list">
+    <button>+ New Chat</button>
+    <ul *ngFor="let history of userHistory ">
+      <p type="button" (click)="showHistory(history)" class="text-left ms-2" data-bs-toggle="modal" data-bs-target="#HistoryModal">{{history.question}}</p>
+
+    </ul>
+  </div>
+ 
+   
+
+  <div class="chat-window">
+    <div class="chat-header">Query</div>
+    <div class="message-container" *ngFor="let item of Answer">
+      <div class="Questions">
+        <img src="../assets/user.png" alt="User">
+        <div class="message">{{item.question}}</div>
+      </div>
+      <div class="bot-message">
+        <img src="../assets/chatbot.png">
+        <div class="Answer">
+          {{item.response}}
+        </div>
+      </div>
+
+      <div class="actions ">
+
+        <i (click)="onThumbsDown(item)" type="button" data-bs-toggle="modal" data-bs-target="#exampleModalCenter"
+          class="fa-solid fa-thumbs-down text-danger "></i>
+
+        <i class="fa-solid fa-thumbs-up text-success"></i>
+      </div>
+
+
+    </div>
+
+    <div class="message-input">
+      <i class="fa fa-user fa-2x me-3" aria-hidden="true"></i>
+      <input type="text" autofocus placeholder="Type your message..." [(ngModel)]="query" (keydown.enter)="onSend()">
+      <i class="fa fa-paper-plane fa-2x " aria-hidden="true" (click)="onSend()"></i>
+    </div>
+  </div>
 </div>

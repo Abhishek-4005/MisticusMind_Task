@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ChatService } from '../../services/chat.service';
 
 @Component({
   selector: 'app-home',
@@ -6,9 +7,19 @@ import { Component } from '@angular/core';
   styleUrl: './home.component.css'
 })
 export class HomeComponent {
-removeUser(_t22: number) {
-throw new Error('Method not implemented.');
-}
-users: any;
+
+  public thumbsDownData: any[] = []
+
+  constructor(private chatService: ChatService) { }
+
+  ngOnInit() {
+    this.getThumbsDownData()
+  }
+
+  getThumbsDownData() {
+    this.chatService.getthumbsDownHistory().subscribe((data:any) => {
+      this.thumbsDownData = data
+    })
+  }
 
 }

@@ -1,25 +1,38 @@
 <div class="container mt-5">
     <div class="row">
-        <!-- Suggested Answers Column -->
+        
         <div class="col-md-4">
             <h5>Suggested Answers</h5>
             <div class="suggestion-list">
-                <thead>
-                    <tr>
-                        <th>Question</th>
-                        <th>Status</th>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                </thead>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Question</th>
+                            <th>Status</th>
+                        </tr> 
+                    </thead>
+                    <tbody>
+                        <tr  *ngFor="let data of thumbsDownData"> 
+                            <td class="p-2" >{{data.Question}}</td>
+                            <td class="p-2">
+                                <button 
+                                  type="button" 
+                                  class="btn-neumorphism" 
+                                  [ngClass]="data.status ? 'text-success' : 'text-danger'"
+                                >
+                                  {{ data.status ? 'Validated' : 'Disapproved' }}
+                                </button>
+                              </td>
+                        </tr> 
+                    </tbody>
+                </table>
+             
             </div>
         </div>
 
-        <!-- Manage Users Column -->
+        
         <div class="col-md-8">
-            <!-- Tabs -->
+      
             <ul class="nav nav-tabs mb-3">
                 <li class="nav-item">
                     <a class="nav-link active" href="#">Train Document</a>
@@ -29,9 +42,9 @@
                 </li>
             </ul>
 
-            <!-- Tab Content -->
+          
             <div class="tab-content">
-                <!-- Manage Users Section -->
+             
                 <button class="btn btn-primary add-user-btn">+ Add Users</button>
                 <input type="text" class="form-control mb-3" placeholder="Search user...">
                 <table class="table user-table">

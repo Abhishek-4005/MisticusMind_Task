@@ -145,3 +145,43 @@ body {
     align-items: center;
     margin-bottom: 15px;
 }
+.queInput{
+    height: 80px;
+}
+.close{
+    border:none;
+    background:none;
+    font-size: 30px;
+}
+.page_content{
+    overflow-y: scroll;
+    
+}
+.res,.source{
+    border: 1px solid;
+    padding: 15px;
+    border-radius: 10px;
+    background-color: #ffffff;
+}
+.queInput{
+    height: 80px;
+    background-color: #ffffff;
+    padding: 15px;
+    border-radius: 10px;
+    background-color: #ffffff;
+}
+.modal-content{
+    background: #f1f1f1;
+}
+h3{
+ font-size: 20px !important;
+    color: #888;
+}
+.modal-footer,.modal-header{
+    border: none !important;
+}
+.modal-footer button{
+    background-color: #5bc0de;
+    color: white;
+
+}
