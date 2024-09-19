@@ -17,8 +17,8 @@ export class HomeComponent {
   }
 
   getThumbsDownData() {
-    this.chatService.getthumbsDownHistory().subscribe((data:any) => {
-      this.thumbsDownData = data
+    this.chatService.getthumbsDownHistory().toPromise().then((res: any) => {
+      this.thumbsDownData = res
     })
   }
 
